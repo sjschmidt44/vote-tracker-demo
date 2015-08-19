@@ -1,5 +1,5 @@
 'use strict';
-
+ $( document ).ready(function() {
 var photoArray = [];
 var randInt1;
 var randInt2;
@@ -48,16 +48,16 @@ var Tracker = function(){
 }
 
 Tracker.prototype.displayWinnerRight = function(){
-	document.getElementById("rightPhoto").style.cssText = "border: 5px solid #A786CF";
-	document.getElementById("nextButton").style.cssText = "visibility: visible;";
+	$("#rightPhoto").css("border", "5px solid #A786CF");
+	$("#nextButton").show();
     photoArray[randInt2].votes = photoArray[randInt2].votes + 1;
     console.log("This cat has " + photoArray[randInt2].votes + " votes");
     //updateChart/votes
 }
 
 Tracker.prototype.displayWinnerLeft = function(){
-	document.getElementById("leftPhoto").style.cssText = "border: 5px solid #EF6CCD";
-	document.getElementById("nextButton").style.cssText = "visibility: visible;";
+	$("#leftPhoto").css("border","5px solid #EF6CCD");
+	$("#nextButton").show();
     photoArray[randInt1].votes = photoArray[randInt1].votes + 1;
     console.log("This cat has " + photoArray[randInt1].votes + " votes");
     //updateChart/votes
@@ -65,18 +65,18 @@ Tracker.prototype.displayWinnerLeft = function(){
 
 
 Tracker.prototype.displayPhotos = function(){
-	document.getElementById("nextButton").style.cssText = "visibility: hidden;";
-	document.getElementById("leftPhoto").style.cssText = "border: none";
-	document.getElementById("rightPhoto").style.cssText = "border: none";
+	$("#nextButton").hide();
+	$("#leftPhoto").css("border", "none");
+	$("#rightPhoto").css("border", "none");
 	randInt1 = Math.floor(Math.random() * 14);
 	randInt2 = Math.floor(Math.random() * 14);
 	while(randInt1 == randInt2){
 		randInt2 = Math.floor(Math.random() * 14);
 	};
-	var leftPhoto = document.getElementById('leftPhoto');
-	var rightPhoto = document.getElementById('rightPhoto');
-	document.getElementById("leftPhoto").src = "img/kittens/" + randInt1 + ".jpg";
-	document.getElementById("rightPhoto").src = "img/kittens/" + randInt2 + ".jpg";
+	var leftPhoto = $('leftPhoto');
+	var rightPhoto = $('rightPhoto');
+	$("#leftPhoto").attr("src", "img/kittens/" + randInt1 + ".jpg");
+	$("#rightPhoto").attr("src", "img/kittens/" + randInt2 + ".jpg");
 
     this.Pie = function(data,options){
 
@@ -111,7 +111,7 @@ Tracker.prototype.displayPhotos = function(){
             }
 
         ];
-        var canvas = document.getElementById("catChart");
+        var canvas = $("#catChart")[0];
         var catChart = canvas.getContext("2d");
         new Chart(catChart).Pie(data);
 	
@@ -119,11 +119,11 @@ Tracker.prototype.displayPhotos = function(){
 
 var track1 = new Tracker();
 track1.displayPhotos();
-var chooseLeft = document.getElementById('leftPhotoDiv');
-chooseLeft.addEventListener('click', track1.displayWinnerLeft);
-var chooseRight = document.getElementById('rightPhotoDiv');
-chooseRight.addEventListener("click", track1.displayWinnerRight);
+var chooseLeft = $('#leftPhotoDiv');
+chooseLeft.click(track1.displayWinnerLeft);
+var chooseRight = $('#rightPhotoDiv');
+chooseRight.click(track1.displayWinnerRight);
 
-document.getElementById("nextButton").addEventListener('click', track1.displayPhotos);
-document.getElementById("nextButton").style.cssText = "visibility: hidden;";
-
+$("#nextButton").click(track1.displayPhotos);
+$("#nextButton").hide();
+ });
