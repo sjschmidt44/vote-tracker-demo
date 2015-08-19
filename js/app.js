@@ -1,29 +1,60 @@
+//clientID:61a923689f757b4
+//Secret: 280fe12c982df8f955b81741eca43d9d427bbb13
+//Authorization: Client-ID YOUR_CLIENT_ID
+
+//https://api.imgur.com/3/album/DDoWy
+//Authorization Client-ID 61a923689f757b4
+
 'use strict';
  $( document ).ready(function() {
 var photoArray = [];
 var randInt1;
 var randInt2;
+var pics;
+
+$.ajax({
+    url: 'https://api.imgur.com/3/album/DDoWy',
+    method: 'GET',
+    headers: {
+        'Authorization': 'Client-ID 61a923689f757b4'
+    }
+})
+
+.done(function(res){
+    pics = res.data.images;
+    console.log(pics);
+    populateArray();
+    track1.displayPhotos();
+})
+
+.fail(function(err){
+    console.log(err);
+})
 
 var Photo = function(fileLocation, votes){ //constructor
 	this.path = fileLocation;
 	this.votes = 1;
 }
 
+//var displayPic = '<img src="' + pics[rand].link+'">';'
+
 //instances of your photos
-var photo0 = new Photo('img/kittens/0.jpg', 1);
-var photo1 = new Photo('img/kittens/1.jpg', 1);
-var photo2 = new Photo('img/kittens/2.jpg', 1);
-var photo3 = new Photo('img/kittens/3.jpg', 1);
-var photo4 = new Photo('img/kittens/4.jpg', 1);
-var photo5 = new Photo('img/kittens/5.jpg', 1);
-var photo6 = new Photo('img/kittens/6.jpg', 1);
-var photo7 = new Photo('img/kittens/7.jpg', 1);
-var photo8 = new Photo('img/kittens/8.jpg', 1);
-var photo9 = new Photo('img/kittens/9.jpg', 1);
-var photo10 = new Photo('img/kittens/10.jpg', 1);
-var photo11 = new Photo('img/kittens/11.jpg', 1);
-var photo12 = new Photo('img/kittens/12.jpg', 1);
-var photo13 = new Photo('img/kittens13.jpg', 1);
+//data.images[3].link
+function populateArray(){
+var photo0 = new Photo(pics[0].link, 1);
+var photo1 = new Photo(pics[1].link, 1);
+var photo2 = new Photo(pics[2].link, 1);
+var photo3 = new Photo(pics[3].link, 1);
+var photo4 = new Photo(pics[4].link, 1);
+var photo5 = new Photo(pics[5].link, 1);
+var photo6 = new Photo(pics[6].link, 1);
+var photo7 = new Photo(pics[7].link, 1);
+var photo8 = new Photo(pics[8].link, 1);
+var photo9 = new Photo(pics[9].link, 1);
+var photo10 = new Photo(pics[10].link, 1);
+var photo11 = new Photo(pics[11].link, 1);
+var photo12 = new Photo(pics[12].link, 1);
+var photo13 = new Photo(pics[13].link, 1);
 
 photoArray.push(photo0);
 photoArray.push(photo1);
@@ -39,7 +70,9 @@ photoArray.push(photo10);
 photoArray.push(photo11);
 photoArray.push(photo12);
 photoArray.push(photo13);
-console.log(photoArray)
+}
+
+//console.log(photoArray)
 
 var Tracker = function(){
 	this.leftPhoto;
@@ -75,8 +108,8 @@ Tracker.prototype.displayPhotos = function(){
 	};
 	var leftPhoto = $('leftPhoto');
 	var rightPhoto = $('rightPhoto');
-	$("#leftPhoto").attr("src", "img/kittens/" + randInt1 + ".jpg");
-	$("#rightPhoto").attr("src", "img/kittens/" + randInt2 + ".jpg");
+	$("#leftPhoto").attr("src", photoArray[randInt1].path);
+	$("#rightPhoto").attr("src", photoArray[randInt2].path);
 
     this.Pie = function(data,options){
 
@@ -118,7 +151,7 @@ Tracker.prototype.displayPhotos = function(){
 }
 
 var track1 = new Tracker();
-track1.displayPhotos();
+
 var chooseLeft = $('#leftPhotoDiv');
 chooseLeft.click(track1.displayWinnerLeft);
 var chooseRight = $('#rightPhotoDiv');
