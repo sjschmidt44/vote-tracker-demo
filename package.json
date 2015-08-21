@@ -1,0 +1,23 @@
+{
+  "name": "vote_tracker",
+  "version": "1.0.0",
+  "description": "vote for the kittens",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.13.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bentongreen/vote_tracker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bentongreen/vote_tracker/issues"
+  },
+  "homepage": "https://github.com/bentongreen/vote_tracker#readme"
+}
