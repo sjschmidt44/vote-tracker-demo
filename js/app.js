@@ -77,10 +77,14 @@ var chart = new Chart(ctx).Bar(data, {
 });
 
 mainContent.addEventListener('click', function(event) {
-  console.log(event.target.id)
-  tracker.vote(event.target.id);
-  tracker.getRandomImg();
-  chart.update();
+  if (event.target.id === tracker.left.name || event.target.id === tracker.right.name) {
+    tracker.vote(event.target.id);
+    tracker.getRandomImg();
+    chart.update();
+  } else {
+    console.log('Click the image, Idiot!');
+  }
+
 })
 
 tracker.getRandomImg();
