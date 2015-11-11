@@ -1,8 +1,0 @@
-**/node_modules/**
-public/js/Chart.min.js
-README.md
-public/**.html
-package.json
-server.js
-public/css/**
-public/img/**
