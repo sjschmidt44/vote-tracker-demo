@@ -1,4 +1,3 @@
-var mainContent = document.getElementById('main_content');
 var data = {
   labels: [],
   datasets: [
@@ -12,7 +11,6 @@ var data = {
     }
   ]
 }
-
 
 var images = [];
 var files = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13'];
@@ -39,6 +37,8 @@ var tracker = {
   right: '',
   leftImgEl: document.getElementById('leftPhoto'),
   rightImgEl: document.getElementById('rightPhoto'),
+  leftCaption: document.getElementById('capLeft'),
+  rightCaption: document.getElementById('capRight'),
 
   getRandomNum: function() {
     return Math.floor(Math.random() * images.length);
@@ -53,8 +53,10 @@ var tracker = {
     }
     this.leftImgEl.src = this.left.path;
     this.leftImgEl.id = this.left.name;
+    this.leftCaption.textContent = this.left.name;
     this.rightImgEl.src = this.right.path;
     this.rightImgEl.id = this.right.name;
+    this.rightCaption.textContent = this.right.name;
   },
 
   vote: function(id) {
@@ -68,7 +70,6 @@ var tracker = {
   }
 }
 
-
 var ctx = document.getElementById('catChart').getContext('2d');
 var chart = new Chart(ctx).Bar(data, {
   scaleShowVerticalLines: false,
@@ -76,6 +77,7 @@ var chart = new Chart(ctx).Bar(data, {
   barStrokeWidth: 1
 });
 
+var mainContent = document.getElementById('main_content');
 mainContent.addEventListener('click', function(event) {
   if (event.target.id === tracker.left.name || event.target.id === tracker.right.name) {
     tracker.vote(event.target.id);
