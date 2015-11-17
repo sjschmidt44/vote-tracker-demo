@@ -1,4 +1,4 @@
-var mainContent = document.getElementById('main_content');
+var mainContent = document.getElementById('main');
 var data = {
   labels: [],
   datasets: [
@@ -11,8 +11,7 @@ var data = {
       data: []
     }
   ]
-}
-
+};
 
 var images = [];
 var files = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13'];
@@ -47,7 +46,7 @@ var tracker = {
   getRandomImg: function() {
     this.left = images[tracker.getRandomNum()];
     this.right = images[tracker.getRandomNum()];
-    
+
     while(this.left === this.right) {
       this.right = images[tracker.getRandomNum()];
     }
@@ -66,7 +65,7 @@ var tracker = {
       }
     }
   }
-}
+};
 
 
 var ctx = document.getElementById('catChart').getContext('2d');
@@ -77,10 +76,10 @@ var chart = new Chart(ctx).Bar(data, {
 });
 
 mainContent.addEventListener('click', function(event) {
-  console.log(event.target.id)
+  console.log(event.target.id);
   tracker.vote(event.target.id);
   tracker.getRandomImg();
   chart.update();
-})
+});
 
 tracker.getRandomImg();
